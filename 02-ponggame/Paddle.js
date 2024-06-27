@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 class Paddle {
     constructor(x, y, l, w, c) {
         this.x = x;
@@ -43,3 +44,50 @@ class Paddle {
         this.move();
     }
 }
+=======
+class Paddle {
+    constructor(x, y, l, w, c) {
+        this.x = x;
+        this.y = y;
+        this.l = l;
+        this.w = w;
+        this.c = c;
+        this.vy = 0;
+    }
+
+    draw(ctx) {
+        ctx.fillStyle = this.c;
+        ctx.strokeStyle = "black";
+        ctx.fillRect(this.x, this.y, this.w, this.l);
+        ctx.strokeRect(this.x, this.y, this.w, this.l);
+    }
+
+    move() {
+        let newY = this.y + this.vy;
+        if (newY < 0) return;
+        if (newY + this.l > boardHeight) return;
+
+        this.y = newY;
+    }
+
+    moveCPU(ball) {
+        // Use the properties of the ball to set a new velocity
+        // Helpful pieces:
+        //   Math.min() and Math.max() to limit the velocity
+        //   ball.y to see where the ball is
+        //   ball.vy to see where the ball is going
+        if (ball.vy > this.vy){
+            this.vy = ball.vy + 1
+        } else if (ball.vy + 2 < this.vy){
+            this.vy = ball.vy + 1
+        }
+
+
+        
+        this.vy = 0; // Modify this line to add your own code
+
+        // Finally, call move to move the paddle normally
+        this.move();
+    }
+}
+>>>>>>> 9f261fa9a9f80d9ded57c6c0d0a076ddb7aaf1de
