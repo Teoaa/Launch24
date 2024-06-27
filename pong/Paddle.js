@@ -32,12 +32,12 @@ class Paddle {
         if (ball.vy > this.vy){
             this.vy = ball.vy + 1
         } else if (ball.vy + 2 < this.vy){
-            this.vy = ball.vy + 1
+            this.vy = ball.vy - 1
         }
 
 
         
-        this.vy = 0; // Modify this line to add your own code
+        // this.vy = 0; // Modify this line to add your own code
 
         // Finally, call move to move the paddle normally
         this.move();

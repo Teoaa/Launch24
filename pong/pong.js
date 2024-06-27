@@ -37,7 +37,7 @@ function resetPaddles() {
 }
 
 function resetBall() {
-    ball = new Ball(boardWidth/2, boardHeight/2, -5, -5, ballRadius, "black");
+    ball = new Ball(boardWidth/2, boardHeight/2, -4, -4, ballRadius, "black");
 }
 
 function clearBoard() {
@@ -67,6 +67,7 @@ function nextTick() {
             ball.bounceWall();
             if (ball.bouncePaddleL(paddleL)) score("right");
             if (ball.bouncePaddleR(paddleR)) score("left");
+            if (scoreL >= 11 || scoreR >= 11) return
             ball.move();
             draw();
             nextTick();
@@ -87,20 +88,20 @@ function updateScore() {
     
     if (scoreL == 11){
         scoreboard.innerHTML = `Left Side Wins!`;
-        ball.vy = 0;
-        ball.vx = 0;
         winsL ++;
         winboard.innerHTML =`${winsL} : ${winsR}`
-        setTimeout(resetGame, 1000);
+        clearInterval(intervalID)
+        // setTimeout(resetGame(), 1000);
     } else if (scoreR == 11){
-        scoreboard.innterHTML = `Right Side Wins`;
-        ball.vy = 0;
-        ball.vx = 0;
+        scoreboard.innerHTML = `Right Side Wins`;
         winsR ++;
         winboard.innerHTML = `${winsL} : ${winsR}`;
-        setTimeout(resetGame, 1000);
+        clearInterval(intervalID)
+        // setTimeout(resetGame(), 1000);
     }else{
         scoreboard.innerHTML = `${scoreL} : ${scoreR}`;
+        
+
     }
     
 }
