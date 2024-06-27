@@ -1,15 +1,3 @@
 body {
-    background-color: darkblue;
-    font-size: 40px;
-    color: wheat;
-    text-align: center;
-}
-#guess {
-    background-color: green;
-    font-family: monospace;
-}
-#report{
-    text-align: center;
-    font-family: monospace;
-    background-color: black;
+    background-color: rgb(203, 255, 255);
 }
