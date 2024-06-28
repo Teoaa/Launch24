@@ -7,6 +7,13 @@ h1 {
     font-size: 60px;
 }
 
+button{
+    cursor: pointer;
+    border-radius: 15px;
+    width: 100px;
+    height: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
 #scoreboard {
     font-size: 40px;
     font-family: 'Courier New', Courier, monospace;
@@ -17,10 +24,3 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
 }
 
-#reset {
-    cursor: pointer;
-    border-radius: 15px;
-    width: 100px;
-    height: 50px;
-    font-family: 'Courier New', Courier, monospace;
-}

@@ -1,3 +1,8 @@
+let error = 0;
+
+function errorpercent(min, max) { 
+    return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 class Paddle {
     constructor(x, y, l, w, c) {
         this.x = x;
@@ -7,6 +12,8 @@ class Paddle {
         this.c = c;
         this.vy = 0;
     }
+
+    
 
     draw(ctx) {
         ctx.fillStyle = this.c;
@@ -23,17 +30,31 @@ class Paddle {
         this.y = newY;
     }
 
+
+
+    
     moveCPU(ball) {
-        // Use the properties of the ball to set a new velocity
-        // Helpful pieces:
-        //   Math.min() and Math.max() to limit the velocity
-        //   ball.y to see where the ball is
-        //   ball.vy to see where the ball is going
-        if (ball.vy > this.vy){
-            this.vy = ball.vy + 1
-        } else if (ball.vy + 2 < this.vy){
-            this.vy = ball.vy - 1
+        error = errorpercent(1, 100)
+        console.log(error)
+        if (error <= 3){
+            if (ball.y > this.vy && ball.vy > this.vy){
+                this.vy = ball.vy - 5
+            } else if(ball.y > this.vy && ball.vy < this.vy ){
+                this.vy = ball.vy + 5
+            }
+        }else{
+            if (ball.y > this.vy && ball.vy > this.vy){
+                this.vy = ball.vy + 5
+            } else if(ball.y > this.vy && ball.vy < this.vy ){
+                this.vy = ball.vy - 5
+            }
         }
+    
+    
+        
+
+
+        
 
 
         

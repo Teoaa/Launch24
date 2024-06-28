@@ -17,6 +17,13 @@ let scoreL = 0;
 let scoreR = 0;
 let winsL = 0;
 let winsR = 0;
+let ballvx = 0;
+let ballvy = 0;
+let freeze = false;
+let color = ""
+let ballc;
+
+
 
 function resetGame() {
     clearInterval(intervalID);
@@ -25,10 +32,19 @@ function resetGame() {
 
     scoreL = 0;
     scoreR = 0;
+    ballColor(color);
     updateScore();
     resetPaddles();
     resetBall();
     nextTick();
+}
+
+function ballColor(color, ballc){
+    ballc = color;
+}
+
+function randBallColor(){
+    
 }
 
 function resetPaddles() {
@@ -37,7 +53,11 @@ function resetPaddles() {
 }
 
 function resetBall() {
-    ball = new Ball(boardWidth/2, boardHeight/2, -4, -4, ballRadius, "black");
+    ballvx = Math.round(Math.random()) * 2 - 1;
+    ballvx = ballvx * 3;
+    ballvy = Math.round(Math.random()) * 2 - 1;
+    ballvy = ballvy * 3;
+    ball = new Ball(boardWidth/2, boardHeight/2, ballvx, ballvy, ballRadius, ballc);
 }
 
 function clearBoard() {
@@ -54,25 +74,39 @@ function draw() {
 }
 
 let intervalID;
-
+function pause(){
+    freeze = true
+}
+function resume(){
+    freeze = false
+}
 function nextTick() {
-    intervalID = setTimeout(
-        () => {
-            paddleL.move();
-            if (cpucheck.checked) {
-                paddleR.moveCPU(ball);
-            } else {
-                paddleR.move();
-            }
-            ball.bounceWall();
-            if (ball.bouncePaddleL(paddleL)) score("right");
-            if (ball.bouncePaddleR(paddleR)) score("left");
-            if (scoreL >= 11 || scoreR >= 11) return
-            ball.move();
-            draw();
-            nextTick();
-        }, 10
-    );
+    if (freeze == false){
+        intervalID = setTimeout(
+            () => {
+                paddleL.move();
+                if (cpucheck.checked) {
+                    paddleR.moveCPU(ball);
+                } else {
+                    paddleR.move();
+                }
+                ball.bounceWall();
+                if (ball.bouncePaddleL(paddleL)) score("right");
+                if (ball.bouncePaddleR(paddleR)) score("left");
+                if (scoreL >= 11 || scoreR >= 11) return
+                ball.move();
+                draw();
+                nextTick();
+            }, 10
+        );
+    } else{
+        intervalID = setTimeout(
+            () => {
+                nextTick();
+            }, 10
+        );
+    }
+
 }
 
 function score(player) {
